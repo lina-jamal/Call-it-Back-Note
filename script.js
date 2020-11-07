@@ -58,6 +58,7 @@ function sum(n1, n2) {
 // run(theCallBack());
 
 //Pass a function into another and call it with arguments
+//Higher Order Functions
 function run(myCallBack, str) {
   myCallBack(str);
 }
