@@ -67,31 +67,8 @@ function logTheArgument(string) {
   console.log("Callback is being run with input:", string);
 }
 
-run(logTheArgument);
+// run(logTheArgument, "hi");
 
-function firstFunction() {
-  console.log("I'm the first function");
-}
-
-function secondFunction(callback) {
-  callback();
-  console.log("I'm the second function and I expect a callback as an input");
-}
-
-function thirdFunction(callback) {
-  callback();
-  console.log(
-    "I'm the third function, I'm also expecting a callback as an input"
-  );
-}
-
-//secondFunction(function () { firstFunction()})
-thirdFunction(secondFunction(firstFunction));
-// what wrong??
-//how can we fix that?
-thirdFunction(function () {
-  secondFunction(firstFunction);
-});
 ////////////////////////////Synchronous Callbacks///////
 
 function syncfun() {
@@ -113,17 +90,18 @@ function syncFun() {
     return callback(value);
   }
 
-  var result = applyTo(addOne, 2);
+  const result = applyTo(addOne, 2);
 
   console.log("Result is: " + result);
 }
 /////////////////////////////////Asynchronous Callbacks///////
 
-setTimeout(function () {
-  console.log("Timeout over");
-}, 1000);
+// setTimeout(function () {
+//   console.log("Timeout over");
+// }, 1000);
 
-console.log("Finished?");
+// console.log("Finished?");
+
 ////////////////////////////
 // This is our asynchronous function
 function waitOneSecondThen(callback) {
@@ -138,8 +116,19 @@ function printResult(value) {
   console.log("Result is " + value);
 }
 
-waitOneSecondThen(printResult);
-console.log("Starting!");
+// waitOneSecondThen(printResult);
+// console.log("Starting!");
+
+//////////////////////
+function printResult(value) {
+  console.log("Result is " + value);
+  return value;
+}
+
+// const result = waitOneSecondThen(printResult);
+
+// console.log("Starting");
+// console.log("Return value is " + result);
 //////////////////////////////////////////
 var x = 2;
 function AddOne(num) {
@@ -147,20 +136,20 @@ function AddOne(num) {
     x += 1;
   }, 2000);
 }
-console.log(x);
+// console.log(x);
 
-// function asyncAddOne(number, callback) {
-//   setTimeout(function () {
-//     callback(number + 1);
-//   }, 3000);
-// }
+function asyncAddOne(number, callback) {
+  setTimeout(function () {
+    callback(number + 1);
+  }, 3000);
+}
 
-// function asyncMultiplyThree(number, callback) {
-//   console.log("result from first function:", number);
-//   setTimeout(function () {
-//     callback(number * 3);
-//   }, 3000);
-// }
+function asyncMultiplyThree(number, callback) {
+  console.log("result from first function:", number);
+  setTimeout(function () {
+    callback(number * 3);
+  }, 3000);
+}
 
 // asyncAddOne(10, function(newNumber) {
 //   asyncMultiplyThree(newNumber, function(result) {
@@ -183,4 +172,39 @@ function logAsynk() {
   }, 0);
   console.log("finish");
 }
-logAsynk();
+// logAsynk();
+/////////////////////  Callback Hell  //////////////////////
+// function first(callback) {
+//   console.log("I'm the first function and expect a callback as an input");
+//   callback();
+// }
+
+// function second(callback) {
+//   console.log("I'm the second function and expect a callback as an input");
+//   callback();
+// }
+
+// function third() {
+//   console.log("I'm the third function, I'm just a regular function");
+// }
+
+// second(third);
+// first(second(third));
+
+// function first(callback) {
+//   setTimeout(function () {
+//     console.log("I'm the first function and expect a callback as an input");
+//     callback();
+//   }, 10);
+// }
+
+// function second(callback) {
+//   setTimeout(function () {
+//     console.log("I'm the second function and expect a callback as an input");
+//     callback();
+//   }, 10);
+// }
+
+// function third() {
+//   console.log("I'm the third function, I'm just a regular function");
+// }
