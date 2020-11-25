@@ -206,19 +206,18 @@ function log(string) {
 
 //////////////////////////////////////////
 /////ex///////
-// function asyncAddOne(number, callback) {
-//   setTimeout(function () {
-//     callback(number + 1);
-//   }, 3000);
-// }
+function asyncAddOne(number, callback) {
+  setTimeout(function () {
+    callback(number + 1);
+  }, 3000);
+}
 
-// function asyncMultiplyThree(number, callback) {
-//   console.log("result from first function:", number);
-//   setTimeout(function () {
-//     callback(number * 3);
-//   }, 3000);
-// }
-// asyncAddOne(4, asyncMultiplyThree);
+function asyncMultiplyThree(number, callback) {
+  console.log("result from first function:", number);
+  setTimeout(function () {
+    callback(number * 3);
+  }, 3000);
+}
 
 // asyncAddOne(10, function(newNumber) {
 //   asyncMultiplyThree(newNumber, function(result) {
