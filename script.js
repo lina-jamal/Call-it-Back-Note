@@ -1,6 +1,6 @@
-function sum(n1, n2) {
-  return n1 + n2;
-}
+// function sum(n1, n2) {
+//   return n1 + n2;
+// }
 
 // function has properties
 // sum.name
@@ -14,6 +14,7 @@ function sum(n1, n2) {
 
 //1-function is an instance of the Object type
 // sum instanceof Object;
+
 //2-store functions in other data structures:
 
 // const sumObj = {
@@ -36,16 +37,16 @@ function sum(n1, n2) {
 
 /// *** Higher Order Functions ***
 
-// function run(myCallBack) {
-//   myCallBack();
-// }
-
-// function theCallBack() {
-//   console.log("Jack, come back");
-// }
-
 //Q: How do I pass a function as an argument, though thinking?
+function run(fun) {
+  fun(); // thecallbacck() // udefined()
+}
 
+function theCallBack() {
+  console.log("Jack, come back");
+}
+
+// run(theCallBack());
 // run(function () {
 //   console.log("Hi from callBack");
 // });
@@ -58,98 +59,166 @@ function sum(n1, n2) {
 // run(theCallBack());
 
 //Pass a function into another and call it with arguments
-//Higher Order Functions
-function run(myCallBack, str) {
-  myCallBack(str);
+
+function run(fun, fun2, str) {
+  fun(str); //logTheArgument(str)
+  fun2(str);
 }
 
 function logTheArgument(string) {
-  console.log("Callback is being run with input:", string);
+  console.log("Callback is being run!");
+  console.log(string); //Done
 }
+function log(string) {
+  // console.log("Callback is being run!");
+  console.log(string); //Done
+}
+
+// run(logTheArgument, log, "Finish");
+
+//////////////////////////
+// function run(myCallBack, str) {
+//   myCallBack(str);
+// }
+
+// function logTheArgument(string) {
+//   console.log("Callback is being run with input:", string);
+// }
 
 // run(logTheArgument, "hi");
 
 ////////////////////////////Synchronous Callbacks///////
 
-function syncfun() {
-  function logArgument(x) {
-    console.log("Passed: " + x);
-  }
+// function syncfun() {
+//   function logArgument(x) {
+//     console.log("Passed: " + x); // passed 7
+//   }
 
-  [1, 2, 3].forEach(logArgument);
+//   [1, 2, 3].forEach(logArgument);
 
-  console.log("Done");
-}
+//   console.log("Done");
+// }
+///////////////////////
 
-function syncFun() {
-  function addOne(x) {
-    return x + 1;
-  }
+// function first(fun) {
+//   console.log("first fun");
+//   fun();
+// }
+// function sec() {
+//   console.log("sec fun");
+// }
 
-  function applyTo(callback, value) {
-    return callback(value);
-  }
+// function third() {
+//   console.log("third fun");
+// }
+// first(third);
+// // sec();
+// // third();
 
-  const result = applyTo(addOne, 2);
+/////////////////////
+// function syncFun() {
+// function addOne(x) {
+//   return x + 1;
+// }
 
-  console.log("Result is: " + result);
-}
+// function applyTo(callback, value) {
+//   return callback(value); //addOne(2)
+// }
+
+// const result = applyTo(addOne, 2);
+
+// console.log("Result is: " + result);
+// }
+// syncFun();
+
 /////////////////////////////////Asynchronous Callbacks///////
 
 // setTimeout(function () {
 //   console.log("Timeout over");
 // }, 1000);
+// setTimeout(function () {
+//   console.log("No Waiting");
+// }, 0);
 
 // console.log("Finished?");
 
 ////////////////////////////
 // This is our asynchronous function
-function waitOneSecondThen(callback) {
-  var result = 10;
-  setTimeout(function () {
-    callback(result);
-  }, 1000);
-}
+// function getStudent(callback) {
+//   setTimeout(function () {
+//     console.log("getting Student...");
+//     callback();
+//   }, 1000);
+//   // console.log("get Student");
+// }
 
-// This is our callback!
-function printResult(value) {
-  console.log("Result is " + value);
-}
+// function processStudent() {
+//   console.log("process Student....");
+// }
 
-// waitOneSecondThen(printResult);
+// function deleteStudent() {
+//   console.log("delete Student....");
+// }
+// function renderHtml() {
+//   console.log("render");
+// }
+// getStudent(() => console.log("edit student"));
+// processStudent();
+// renderHtml();
+
+// function getStudent() {
+//   // console.log("getting Student....");
+//   setTimeout(function () {
+//     console.log("getting Student....");
+//     processStudent();
+//   }, 2000);
+// }
+
+//////////////////////////////set
+// function waitOneSecondThen(callback) {
+//   var result = 10;
+//   setTimeout(function () {
+//     callback(result);
+//   }, 1000);
+//   // return "hi";
+// }
+
+// // This is our callback!
+// function printResult(value) {
+//   console.log("Result is " + value);
+//   // return value;
+// }
+
+// let n = waitOneSecondThen(printResult);
 // console.log("Starting!");
+// console.log(n);
 
 //////////////////////
-function printResult(value) {
-  console.log("Result is " + value);
-  return value;
-}
+// function printResult(value) {
+//   console.log("Result is " + value);
+//   return value;
+// }
 
 // const result = waitOneSecondThen(printResult);
 
 // console.log("Starting");
 // console.log("Return value is " + result);
+
 //////////////////////////////////////////
-var x = 2;
-function AddOne(num) {
-  setTimeout(() => {
-    x += 1;
-  }, 2000);
-}
-// console.log(x);
+/////ex///////
+// function asyncAddOne(number, callback) {
+//   setTimeout(function () {
+//     callback(number + 1);
+//   }, 3000);
+// }
 
-function asyncAddOne(number, callback) {
-  setTimeout(function () {
-    callback(number + 1);
-  }, 3000);
-}
-
-function asyncMultiplyThree(number, callback) {
-  console.log("result from first function:", number);
-  setTimeout(function () {
-    callback(number * 3);
-  }, 3000);
-}
+// function asyncMultiplyThree(number, callback) {
+//   console.log("result from first function:", number);
+//   setTimeout(function () {
+//     callback(number * 3);
+//   }, 3000);
+// }
+// asyncAddOne(4, asyncMultiplyThree);
 
 // asyncAddOne(10, function(newNumber) {
 //   asyncMultiplyThree(newNumber, function(result) {
@@ -159,37 +228,34 @@ function asyncMultiplyThree(number, callback) {
 
 ///////////////////////////////////
 
-function logAsynk() {
-  console.log("hello callback");
-  setTimeout(function () {
-    console.log("one");
-  }, 2000);
-  setTimeout(function () {
-    console.log("two");
-  }, 1000);
-  setTimeout(function () {
-    console.log("three");
-  }, 0);
-  console.log("finish");
-}
+// function logAsynk() {
+// console.log("hello callback"); // hello  finish  three two one
+// setTimeout(function () {
+//   console.log("one");
+// }, 2000);
+// setTimeout(function () {
+//   console.log("two");
+// }, 1000);
+// setTimeout(function () {
+//   console.log("three");
+// }, 0);
+// console.log("finish");
+
 // logAsynk();
 /////////////////////  Callback Hell  //////////////////////
-// function first(callback) {
-//   console.log("I'm the first function and expect a callback as an input");
-//   callback();
-// }
+function first(callback) {
+  // callback();
+}
 
-// function second(callback) {
-//   console.log("I'm the second function and expect a callback as an input");
-//   callback();
-// }
+function third(x) {
+  console.log(x);
+}
 
-// function third() {
-//   console.log("I'm the third function, I'm just a regular function");
-// }
-
-// second(third);
-// first(second(third));
+first(
+  (function (cb) {
+    cb(9);
+  })(third)
+);
 
 // function first(callback) {
 //   setTimeout(function () {
@@ -208,3 +274,22 @@ function logAsynk() {
 // function third() {
 //   console.log("I'm the third function, I'm just a regular function");
 // }
+
+// function getStudent(cb) {
+//   setTimeout(function () {
+//     console.log("getting Student....");
+//     cb(function () {
+//       console.log("render");
+//     });
+//   }, 2000);
+// }
+// function processStudent() {
+//   setTimeout(function () {
+//     console.log("process Student....");
+//     renderHtml();
+//   }, 1000);
+// }
+// getStudent(function (cb) {
+//   console.log("process Student....");
+//   cb();
+// });
